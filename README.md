@@ -8,5 +8,5 @@ just testing a <b>node.js</b> api for study
 - npm install nodemon --save-dev
 
 ###### now you should: 
-- configure your host and database settings in the <b>variables.env</b> file to the sistem works;
+- configure your host and database settings in the <i>variables.env</i> file to the sistem works;
 - create a command in the <i>package.json</i> file to execute the nodemon in the <i>server.js</i> file;
