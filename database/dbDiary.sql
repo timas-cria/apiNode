@@ -4,7 +4,7 @@ drop database dbDiary;
 use dbDiary;
 
 create table Users(
-	id int not null auto_increment primary key,
+    id int not null auto_increment primary key,
     name varchar(63) not null,
     email varchar(255) not null,
     password varchar(255) not null,
@@ -21,40 +21,18 @@ values ('timas', 'timas@gmail', '123456', 'path'),
 ('João Pereira', 'joao.pereira@email.com', 'Seguranca@2023', 'path'),
 ('Laura Fernandes', 'laura.fernandes@email.com', 'MeuAcessoPrivado', 'path');
 
-drop table users;
+drop table Users;
 select * from Users;
 
-create table categories(
-	id int not null auto_increment primary key,
-    name varchar(63) not null,
-    description varchar(255),
-    fk_user int not null,
-    
-    foreign key(fk_user) references users(id)
-);
-
-insert into Categories (name, description, fk_user) values 
-('Voluntariado', 'Tarefas relacionadas a atividades de voluntariado e caridade.', 1),
-('Reparos Domésticos', 'Tarefas relacionadas a manutenção e reparos em casa.', 3),
-('Vendas', 'Tarefas relacionadas a estratégias de vendas e atendimento ao cliente.', 5),
-('Saúde e Bem-Estar', 'Tarefas relacionadas a manter uma vida saudável.', 2),
-('Lazer', 'Tarefas relacionadas ao planejamento de atividades de lazer.', 4),
-('Acadêmico', 'Tarefas relacionadas a estudos e educação.', 6),
-('Compras', 'Tarefas relacionadas a compras e abastecimento.', 7),
-('Gerenciamento de Projetos', 'Tarefas relacionadas à gestão e acompanhamento de projetos.', 2);
-
-drop table Categories;
-select * from Categories;
-
 create table Tasks(
-	id int not null auto_increment primary key,
+    id int not null auto_increment primary key,
     name varchar(63) not null,
     description varchar(255),
     deadline datetime,
 	
     fk_user int not null,
     
-    foreign key(fk_user) references users(id)
+    foreign key(fk_user) references Users(id)
 );
 
 insert into Tasks (name, description, deadline, fk_user) values 
@@ -71,16 +49,3 @@ insert into Tasks (name, description, deadline, fk_user) values
 
 drop table Tasks;
 select * from Tasks;
-
-select Tasks.id, Tasks.name, Tasks.description, Tasks.deadline as 'data limite', 
-Categories.name as 'nome da categoria', Categories.description as 'descrição da categoria' from Tasks 
-inner join Categories on fk_category = Categories.id;
-
-select Tasks.id, Tasks.name, Tasks.description, Tasks.deadline as 'data limite', 
-Categories.name as 'nome da categoria', Categories.description as 'descrição da categoria' from Tasks 
-inner join Categories on fk_category = Categories.id
-where Categories.name = 'estudo';
-
-select Tasks.name, Tasks.description, Tasks.deadline FROM Tasks 
-inner join Categories ON Tasks.fk_category = Categories.id 
-where categories.name = 'vida';
